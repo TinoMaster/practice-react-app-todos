@@ -1,4 +1,4 @@
-import { TodoItem } from "../../../components/TodoItem";
+import { TodoItem } from "./TodoItem";
 import type { Todo } from "../../../types/todo";
 
 export const DisplayTodos = ({ todos, isLoading }: { todos: Todo[]; isLoading: boolean }) => {

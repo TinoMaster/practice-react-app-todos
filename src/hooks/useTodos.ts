@@ -43,6 +43,21 @@ export const useTodo = (id: number): UseQueryResult<Todo, Error> => {
 };
 
 // Hooks for mutations
+export const useDeleteTodo = (): UseMutationResult<void, Error, number> => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (id) => todoService.deleteTodo(id),
+    onSuccess: () => {
+      // Invalidate todos list queries
+      queryClient.invalidateQueries({ queryKey: todoKeys.lists() });
+    },
+    onError: (error) => {
+      console.error("Error deleting todo:", error);
+    }
+  });
+};
+
 export const useCreateTodo = (): UseMutationResult<Todo, Error, CreateTodoData> => {
   const queryClient = useQueryClient();
 
@@ -77,17 +92,4 @@ export const useUpdateTodo = (): UseMutationResult<
   });
 };
 
-export const useDeleteTodo = (): UseMutationResult<void, Error, number> => {
-  const queryClient = useQueryClient();
 
-  return useMutation({
-    mutationFn: todoService.deleteTodo,
-    onSuccess: () => {
-      // Invalidate todos list queries
-      queryClient.invalidateQueries({ queryKey: todoKeys.lists() });
-    },
-    onError: (error) => {
-      console.error("Error deleting todo:", error);
-    }
-  });
-};

@@ -20,7 +20,7 @@ export default function TodoEdit() {
       { id: todoId, data: data },
       {
         onSuccess: () => {
-          navigate(`/todos/${todoId}`);
+          navigate(`/todos`);
         }
       }
     );
@@ -32,7 +32,7 @@ export default function TodoEdit() {
 
   return (
     <Fragment>
-      <HeaderPageDetail title="Edit Todo" backUrl={`/todos/${todoId}`} />
+      <HeaderPageDetail title="Edit Todo" backUrl={`/todos`} />
 
       <div className="bg-gray-800/80 rounded-lg shadow-lg p-6 border border-gray-700">
         <TodoForm
