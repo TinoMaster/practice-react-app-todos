@@ -47,13 +47,10 @@ export const useCreateTodo = (): UseMutationResult<Todo, Error, CreateTodoData> 
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: todoService.createTodo,
-    onSuccess: (newTodo) => {
+    mutationFn: (data) => todoService.createTodo(data),
+    onSuccess: () => {
       // Invalidate todos list queries
       queryClient.invalidateQueries({ queryKey: todoKeys.lists() });
-
-      // Optionally, add the new todo to existing cache
-      queryClient.setQueryData(todoKeys.detail(newTodo.id), newTodo);
     },
     onError: (error) => {
       console.error("Error creating todo:", error);
@@ -70,10 +67,7 @@ export const useUpdateTodo = (): UseMutationResult<
 
   return useMutation({
     mutationFn: ({ id, data }) => todoService.updateTodo(id, data),
-    onSuccess: (updatedTodo) => {
-      // Update the specific todo in cache
-      queryClient.setQueryData(todoKeys.detail(updatedTodo.id), updatedTodo);
-
+    onSuccess: () => {
       // Invalidate todos list queries to ensure consistency
       queryClient.invalidateQueries({ queryKey: todoKeys.lists() });
     },
@@ -88,38 +82,12 @@ export const useDeleteTodo = (): UseMutationResult<void, Error, number> => {
 
   return useMutation({
     mutationFn: todoService.deleteTodo,
-    onSuccess: (_, deletedId) => {
-      // Remove the todo from cache
-      queryClient.removeQueries({ queryKey: todoKeys.detail(deletedId) });
-
+    onSuccess: () => {
       // Invalidate todos list queries
       queryClient.invalidateQueries({ queryKey: todoKeys.lists() });
     },
     onError: (error) => {
       console.error("Error deleting todo:", error);
-    }
-  });
-};
-
-// Custom hook for bulk operations
-export const useBulkUpdateTodos = (): UseMutationResult<
-  Todo[],
-  Error,
-  { ids: number[]; data: Partial<UpdateTodoData> }
-> => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: async ({ ids, data }) => {
-      const promises = ids.map((id) => todoService.updateTodo(id, data));
-      return Promise.all(promises);
-    },
-    onSuccess: () => {
-      // Invalidate all todo queries for consistency
-      queryClient.invalidateQueries({ queryKey: todoKeys.all });
-    },
-    onError: (error) => {
-      console.error("Error bulk updating todos:", error);
     }
   });
 };
