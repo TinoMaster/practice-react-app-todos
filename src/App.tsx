@@ -16,6 +16,13 @@ function App() {
           <Route path="add" element={<TodoAdd />} />
         </Route>
 
+        {/* <Route path="/users" element={<UserLayout />}>
+          <Route index element={<UserList />} />
+          <Route path=":id" element={<UserDetail />} />
+          <Route path="edit/:id" element={<UserEdit />} />
+          <Route path="add" element={<UserAdd />} />
+        </Route> */}
+
         <Route path="/" element={<Navigate to="/todos" replace />} />
 
         <Route path="*" element={<Navigate to="/todos" replace />} />
