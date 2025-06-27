@@ -9,7 +9,7 @@ export default function UserList() {
     const navigate = useNavigate();
     
     // useMemo per memorizzare i query params (cache) ed evitare ricalcoli inutili
-    // TODO: vedere se necessario inserire altri filtri o togliere il metodo
+    // TODO: inserire altri filtri 
     const queryParams = useMemo<UsersQueryParams>(() => {
         return {
             filters: filter !== "all" ? { search: filter } : undefined
