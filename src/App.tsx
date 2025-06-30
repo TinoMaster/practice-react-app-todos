@@ -7,6 +7,8 @@ import TodoLayout from "./components/layouts/TodoLayout";
 import Navbar from "./components/layouts/Navbar";
 import UserLayout from "./components/layouts/UserLayout";
 import UserList from "./pages/users/UserList";
+import UserDetail from "./pages/users/UserDetail";
+import UserEdit from "./pages/users/UserEdit";
 
 function App() {
   return (
@@ -22,9 +24,9 @@ function App() {
 
         <Route path="/users" element={<UserLayout />}>
           <Route index element={<UserList />} />
-          {/* <Route path=":id" element={<UserDetail />} />
+           <Route path=":id" element={<UserDetail />} />
           <Route path="edit/:id" element={<UserEdit />} />
-          <Route path="add" element={<UserAdd />} /> */}
+          {/* <Route path="add" element={<UserAdd />} /> */}
         </Route>
 
         <Route path="/" element={<Navigate to="/todos" replace />} />
