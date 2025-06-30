@@ -119,12 +119,6 @@
       "id": "20",
       "title": "ullam nobis libero sapiente ad optio sint",
       "completed": true
-    },
-    {
-      "id": "21",
-      "userId": 1,
-      "title": "asaaaaaaaaaaaaaa",
-      "completed": false
     }
   ],
   "users": [
@@ -337,7 +331,7 @@
     },
     {
       "id": 10,
-      "name": "Clementina DuBuque",
+      "name": "Clementina DuBuqu",
       "username": "Moriah.Stanton",
       "email": "Rey.Padberg@karina.biz",
       "address": {
@@ -351,7 +345,7 @@
         }
       },
       "phone": "024-648-3804",
-      "website": "ambrose.net",
+      "website": "http://www.ambrose.net",
       "company": {
         "name": "Hoeger LLC",
         "catchPhrase": "Centralized empowering task-force",
